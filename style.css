@@ -419,7 +419,7 @@ nav.scrolled {
 }
 
 /* -------------------------------------------------
-   1. SECTION & SLIDER
+   PROJECTS SECTION – FULLY RESPONSIVE
    ------------------------------------------------- */
 .projects {
   padding: 6rem 5%;
@@ -427,6 +427,7 @@ nav.scrolled {
   overflow: hidden;
 }
 
+/* Slider container – centered & limited width */
 .projects-slider {
   position: relative;
   max-width: 1200px;
@@ -434,17 +435,20 @@ nav.scrolled {
   overflow: hidden;
 }
 
+/* Track – flex container that slides */
 .slider-track {
   display: flex;
   transition: transform 0.45s ease-in-out;
   gap: 2rem;
+  padding: 0 1rem;               /* tiny side padding for mobile */
 }
 
 /* -------------------------------------------------
-   2. CARD SIZING (responsive)
+   CARD BASE WIDTH (responsive)
    ------------------------------------------------- */
 .project-card {
-  flex: 0 0 calc(100% / 3 - 2rem * 2 / 3);   /* 3 cards on desktop */
+  flex: 0 0 calc(100% / 3 - 2rem * 2 / 3);   /* 3 cards on large screens */
+  min-width: 0;                     /* allow text to shrink */
   background: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
@@ -455,22 +459,51 @@ nav.scrolled {
   flex-direction: column;
 }
 
-/* Tablet: 2 cards */
+/* -------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   ------------------------------------------------- */
+
+/* Large tablets & small laptops (≤1024px) → 2 cards */
 @media (max-width: 1024px) {
   .project-card {
     flex: 0 0 calc(50% - 1rem);
   }
 }
 
-/* Mobile: 1 card */
+/* Phones & small tablets (≤640px) → 1 card */
 @media (max-width: 640px) {
   .project-card {
     flex: 0 0 calc(100% - 2rem);
   }
+
+  .projects-slider {
+    padding: 0 1rem;
+  }
+
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .slider-btn.prev  { left: 8px; }
+  .slider-btn.next  { right: 8px; }
+}
+
+/* Very small screens (≤480px) – extra safety */
+@media (max-width: 480px) {
+  .project-card {
+    flex: 0 0 100%;
+  }
+
+  .slider-track {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
 }
 
 /* -------------------------------------------------
-   3. HOVER EFFECTS
+   HOVER EFFECTS (unchanged)
    ------------------------------------------------- */
 .project-card:hover {
   transform: translateY(-10px);
@@ -479,7 +512,7 @@ nav.scrolled {
 }
 
 /* -------------------------------------------------
-   4. IMAGE FIT (your original + enhancements)
+   IMAGE FIT (your original + enhancements)
    ------------------------------------------------- */
 .project-image {
   width: 100%;
@@ -510,7 +543,7 @@ nav.scrolled {
   transform: scale(1.08);
 }
 
-/* Emoji placeholder fallback */
+/* Fallback for cards without real image */
 .project-image:not(:has(img)) {
   font-size: 3.5rem;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
@@ -519,7 +552,7 @@ nav.scrolled {
 }
 
 /* -------------------------------------------------
-   5. CONTENT
+   CARD CONTENT
    ------------------------------------------------- */
 .project-content {
   padding: 2rem;
@@ -596,7 +629,7 @@ nav.scrolled {
 }
 
 /* -------------------------------------------------
-   6. NAVIGATION BUTTONS
+   NAVIGATION BUTTONS (responsive)
    ------------------------------------------------- */
 .slider-btn {
   position: absolute;
@@ -621,8 +654,15 @@ nav.scrolled {
   background: rgba(0,0,0,.8);
 }
 
-.slider-btn.prev { left: 12px; }
-.slider-btn.next { right: 12px; }
+.slider-btn.prev  { left: 12px; }
+.slider-btn.next  { right: 12px; }
+
+/* Hide arrows on very small screens if you prefer swipe-only */
+@media (max-width: 480px) {
+  .slider-btn {
+    display: none;   /* optional – remove if you want arrows */
+  }
+}
 
 /* Certificates Section */
 .certificates {
